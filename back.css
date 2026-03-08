@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Fascinate+Inline&family=Faster+One&family=Fredericka+the+Great&family=Orbitron:wght@400..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Titillium Web', sans-serif;
+}
+h1 {
+    text-align: left;
+    margin-top: 50px;
+    color: #e10600;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 80px;
+    -webkit-text-stroke: 2px white;
+    letter-spacing: -2px;
+}
+
+.Driver-card {
+    background: radial-gradient(circle, var(--team), #000 80%);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    width: 300px;
+    display: inline-block;
+    vertical-align: top;
+}
+.Driver-card .driver-image {
+    width: 100%;
+    border-radius: 10px;
+}
+.mclaren {
+    --team: #ff8700;
+}
+.redbull {
+    --team: #1e41ff;
+}
+.racingbulls {
+    --team: #ff0000;
+}
+.haas {
+    --team: #b3b3b3;
+}
+.mercedes {
+    --team: #00d2be;
+}
+.alpine {
+    --team: #0090ff;
+}
+.ferrari {
+    --team: #dc0000;
+}
+.Williams {
+    --team: #005aff;
+}
+.audi {
+    --team: #c0c0c0;
+}
+.cadillac {
+    --team: #a9a9a9;
+}
+.astonmartin {
+    --team: #006f62;
+}
+
