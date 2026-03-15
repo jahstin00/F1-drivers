@@ -1,64 +1,257 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Fascinate+Inline&family=Faster+One&family=Fredericka+the+Great&family=Orbitron:wght@400..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+/* GLOBAL STYLES */
 body {
-    background-color: black;
+    background-color: #0a0a0a;
+    background-image: 
+        linear-gradient(45deg, #111 25%, transparent 25%), 
+        linear-gradient(-45deg, #111 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #111 75%), 
+        linear-gradient(-45deg, transparent 75%, #111 75%),
+        radial-gradient(circle at center, rgba(225, 6, 0, 0.08) 0%, transparent 70%);
+    background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
     color: white;
     font-family: 'Titillium Web', sans-serif;
+    margin: 0;
+    padding: 20px;
+    border-top: 5px solid #e10600;
+    overflow-x: hidden;
 }
+
+/* ANIMATED BACKGROUND PARTICLES */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.particles span {
+    position: absolute;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: speed linear infinite;
+}
+
+.particles span:nth-child(1) { width: 100px; top: 10%; left: 100%; animation-duration: 2s; }
+.particles span:nth-child(2) { width: 150px; top: 25%; left: 100%; animation-duration: 1.5s; animation-delay: 0.5s; }
+.particles span:nth-child(3) { width: 80px; top: 40%; left: 100%; animation-duration: 3s; }
+.particles span:nth-child(4) { width: 200px; top: 55%; left: 100%; animation-duration: 1.2s; animation-delay: 0.2s; }
+.particles span:nth-child(5) { width: 120px; top: 70%; left: 100%; animation-duration: 2.5s; }
+.particles span:nth-child(6) { width: 90px; top: 85%; left: 100%; animation-duration: 1.8s; animation-delay: 0.8s; }
+.particles span:nth-child(7) { width: 180px; top: 15%; left: 100%; animation-duration: 2.2s; }
+.particles span:nth-child(8) { width: 60px; top: 65%; left: 100%; animation-duration: 4s; }
+.particles span:nth-child(9) { width: 250px; top: 50%; left: 100%; animation-duration: 1s; }
+.particles span:nth-child(10) { width: 110px; top: 95%; left: 100%; animation-duration: 2.8s; }
+
+@keyframes speed {
+    0% { transform: translateX(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateX(-150vw); opacity: 0; }
+}
+
+/* TYPOGRAPHY */
 h1 {
+    font-family: 'Bungee Shade', cursive;
     text-align: left;
     margin-top: 50px;
     color: #e10600;
-    font-weight: 700;
-    font-style: italic;
-    font-size: 80px;
-    -webkit-text-stroke: 2px white;
-    letter-spacing: -2px;
+    font-size: 60px;
+    -webkit-text-stroke: 1.5px white;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
+/* GRID LAYOUT */
+.card-continer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 40px; 
+    padding: 20px 0;
+}
+
+/* 3D CARD STRUCTURE */
 .Driver-card {
-    background: radial-gradient(circle, var(--team), #000 80%);
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px;
-    width: 300px;
-    display: inline-block;
-    vertical-align: top;
-}
-.Driver-card .driver-image {
-    width: 100%;
-    border-radius: 10px;
-}
-.mclaren {
-    --team: #ff8700;
-}
-.redbull {
-    --team: #1e41ff;
-}
-.racingbulls {
-    --team: #ff0000;
-}
-.haas {
-    --team: #b3b3b3;
-}
-.mercedes {
-    --team: #00d2be;
-}
-.alpine {
-    --team: #0090ff;
-}
-.ferrari {
-    --team: #dc0000;
-}
-.Williams {
-    --team: #005aff;
-}
-.audi {
-    --team: #c0c0c0;
-}
-.cadillac {
-    --team: #a9a9a9;
-}
-.astonmartin {
-    --team: #006f62;
+    width: calc(48% - 20px); 
+    min-width: 550px; 
+    height: 380px; 
+    background: transparent;
+    position: relative;
+    z-index: 1;
 }
 
+.Driver-card:hover { z-index: 999; }
+
+.Driver-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    perspective: 1200px; 
+}
+
+.Driver-card:hover .Driver-card-inner { transform: rotateY(180deg); }
+
+.main-info, .Did-You-Know {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    box-sizing: border-box;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+    overflow: hidden;
+}
+
+/* FRONT CARD STYLING */
+.main-info {
+    background: radial-gradient(circle at left, var(--team) 0%, #111 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.driver-number {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 140px;
+    color: var(--team);
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.team-name-display {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--team);
+    font-weight: 700;
+    margin: 10px 0;
+    text-transform: uppercase;
+}
+
+.team-spirit-label {
+    font-family: 'Faster One', cursive;
+    font-size: 10px;
+    color: #fff;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    opacity: 0.6;
+}
+
+.principal-box {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid var(--team);
+    padding: 10px 15px;
+    border-radius: 0 8px 8px 0;
+}
+
+.principal-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #888;
+}
+
+.principal-name {
+    font-family: 'Bungee Shade', cursive; 
+    font-size: 14px;
+    color: #fff;
+    margin-top: 5px;
+}
+
+/* BACK CARD STYLING */
+.Did-You-Know {
+    background: #151515;
+    transform: rotateY(180deg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 15px solid var(--team); 
+}
+
+.car-image-bg {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 350px; 
+    opacity: 0.1; 
+    transform: rotate(-10deg); 
+    pointer-events: none;
+}
+
+.back-content {
+    position: relative;
+    z-index: 2; 
+    padding: 30px 40px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Did-You-Know h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--team);
+    font-size: 14px;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
+
+.Did-You-Know p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #eee;
+}
+
+/* DRIVER IMAGE & NAME */
+.Driver-card .driver-image {
+    width: 220px;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.driver-details { flex: 1; text-align: left; }
+
+.Driver-card h2 span {
+    display: block;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 32px;
+    color: var(--team);
+}
+
+.nickname {
+    font-family: 'Fredericka the Great', cursive; 
+    font-size: 24px;
+    color: #ffffff; 
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    margin: 5px 0;
+}
+
+/* TEAM VARIABLES */
+.mclaren { --team: #ff8700; }
+.redbull { --team: #1e41ff; }
+.racingbulls { --team: #034694; }
+.haas { --team: #ffffff; }
+.mercedes { --team: #00d2be; }
+.alpine { --team: #0090ff; }
+.ferrari { --team: #dc0000; }
+.Williams { --team: #005aff; }
+.audi { --team: #c0c0c0; }
+.cadillac { --team: #ffcd00; }
+.astonmartin { --team: #006f62; }
